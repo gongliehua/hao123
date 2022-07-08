@@ -69,11 +69,11 @@
             var ext = getExtName(queryUrl)
             if (ext === "m3u8") {
                 hls.loadSource(queryUrl);
+                hls.attachMedia(video);
             } else {
                 video.src = queryUrl;
             }
         }
-        hls.attachMedia(video);
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
         if (queryUrl !== "") {
             video.src = queryUrl;
@@ -87,6 +87,7 @@
             if (hls !== null) {
                 if (ext === "m3u8") {
                     hls.loadSource(url.value)
+                    hls.attachMedia(video)
                 } else {
                     video.src = url.value;
                 }

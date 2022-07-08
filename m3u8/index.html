@@ -80,10 +80,24 @@
     url.onkeyup = function (event) {
         if (event.code === "Enter" || event.key === "Enter") {
             var videoSrc = url.value
+            var ext = ""
+            var index = videoSrc.indexOf("?")
+            if (index >= 0) {
+                videoSrc = videoSrc.substring(0, index)
+            }
+            index = videoSrc.lastIndexOf(".")
+            if (index >= 0) {
+                ext = videoSrc.substring(index + 1)
+            }
+
             if (hls !== null) {
-                hls.loadSource(videoSrc)
+                if (ext === "m3u8") {
+                    hls.loadSource(url.value)
+                } else {
+                    video.src = url.value;
+                }
             } else {
-                video.src = videoSrc;
+                video.src = url.value;
             }
         }
     }
